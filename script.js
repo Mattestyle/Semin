@@ -5,6 +5,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const activateBtn = document.getElementById("activate");
 
   let revealed = false;
+  const audio = new Audio("shake-sound.wav");
+  function playSound() {
+    try { audio.currentTime = 0; audio.play(); } catch(e){}
+  }
+
   let shakeInstance = null;
 
   function initShake() {
@@ -45,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   fallbackBtn.addEventListener("click", async () => {
     await requestPermission();
-    revealCV();
+    playSound(); revealCV();
   });
 
 });
