@@ -32,7 +32,7 @@ document.addEventListener("DOMContentLoaded", () => {
     revealed = true;
 
     dust.classList.add("animate-out");
-    setTimeout(() => dust.style.display = "none", 900);
+    setTimeout(() => { dust.style.display = "none"; }, 900);
 
     intro.classList.add("hidden");
     cv.classList.remove("hidden");
@@ -54,17 +54,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (isModernIOS && hasRequestPermission) {
     enableMotionBtn.classList.remove("hidden");
+    setStatus("Appuyez sur « Activer les capteurs » puis autorisez l’accès.");
     enableMotionBtn.addEventListener("click", () => {
       DeviceMotionEvent.requestPermission().then(res => {
         if (res === "granted") {
           enableMotionBtn.classList.add("hidden");
           initShake();
-        } else setStatus("Permission refusée.");
-      });
+        } else setStatus("Permission refusée. Utilisez le bouton pour afficher le CV.");
+      }).catch(() => setStatus("Impossible d’accéder aux capteurs."));
     });
   } else if (!isIOS) {
     initShake();
   } else {
     initShake();
+    setStatus("Secouez votre iPhone. Si rien ne se passe, utilisez le bouton pour afficher le CV.");
   }
 });
