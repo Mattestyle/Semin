@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secoue pour révéler mon CV</title>
+    <link rel="stylesheet" href="style.css" />
+    <!-- Librairie de détection du "shake" -->
+    <script src="https://unpkg.com/shake.js@1.2.2/shake.min.js"></script>
+</head>
+<body>
+    <div id="matrix-bg"></div>
+
+    <div id="app">
+        <header class="header">
+            <h1 class="title">ACCESS CV_2025 &sol; YOAN MELLINGER</h1>
+            <p class="subtitle">PROTOCOLE DE SÉCURITÉ &mdash; AUTHENTIFICATION PAR MOUVEMENT</p>
+        </header>
+
+        <section id="dust-overlay" class="dust-overlay">
+            <div class="dust-layer"></div>
+            <div class="dust-layer dust-layer-2"></div>
+
+            <div class="intro-card">
+                <p class="intro-label">Étape 1 &sol; Déverrouillage</p>
+                <h2 class="intro-title">Secoue ton téléphone pour nettoyer l&apos;écran</h2>
+                <p class="intro-text">
+                    Le CV est protégé par une couche de <span class="accent">poussière quantique</span>.
+                    Pour le faire apparaître, <strong>secoue ton téléphone</strong> comme si tu dépoussiérais l&apos;écran.
+                </p>
+
+                <div class="status status-idle" id="status-text">
+                    En attente de mouvement...
+                </div>
+
+                <div class="buttons">
+                    <button id="enable-motion" class="btn secondary hidden">
+                        Activer les capteurs de mouvement (iOS)
+                    </button>
+                    <button id="reveal-manual" class="btn ghost">
+                        Pas de capteur &quest; Afficher le CV quand même
+                    </button>
+                </div>
+
+                <p class="hint">
+                    Astuce : essaie quelques secousses énergiques mais raisonnables &mdash; ton téléphone
+                    te remerciera.
+                </p>
+            </div>
+        </section>
+
+        <main id="cv-container" class="cv-container hidden">
+            <section class="cv-panel">
+                <header class="cv-header">
+                    <h2>CV_2025 &sol; YOAN MELLINGER</h2>
+                    <p>Chef de projet &mdash; Marketing &mdash; E‑commerce</p>
+                </header>
+                <div class="cv-frame-wrapper">
+                    <iframe
+                        title="CV Yoan Mellinger 2025"
+                        src="CV_2025_Yoan_Mellinger.pdf#view=fitH"
+                        class="cv-frame"
+                    >
+                    </iframe>
+                </div>
+                <p class="cv-note">
+                    Si le PDF ne s&apos;affiche pas, <a href="CV_2025_Yoan_Mellinger.pdf" target="_blank" rel="noopener">clique ici pour l&apos;ouvrir dans un nouvel onglet</a>.
+                </p>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
