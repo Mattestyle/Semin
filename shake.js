@@ -1,12 +1,93 @@
-// Minimal local shake.js
+// Version locale simplifiée de shake.js pour compatibilité GitHub Pages
 (function (window, document) {
-    function Shake(opts){this.hasDeviceMotion='ondevicemotion'in window;this.options={threshold:12,timeout:800};if(typeof opts==='object'){for(var k in opts){this.options[k]=opts[k];}}this.lastTime=new Date();this.lastX=null;this.lastY=null;this.lastZ=null;this.event=document.createEvent('Event');this.event.initEvent('shake',true,true);}
-    Shake.prototype.reset=function(){this.lastTime=new Date();this.lastX=this.lastY=this.lastZ=null;}
-    Shake.prototype.start=function(){this.reset();if(this.hasDeviceMotion){window.addEventListener('devicemotion',this,false);}}
-    Shake.prototype.stop=function(){if(this.hasDeviceMotion){window.removeEventListener('devicemotion',this,false);}this.reset();}
-    Shake.prototype.handleEvent=function(e){if(e.type==='devicemotion'){this.devicemotion(e);}}
-    Shake.prototype.devicemotion=function(e){var c=e.accelerationIncludingGravity;if(!c)return;var ct=new Date();var diff=ct-this.lastTime;if(diff>this.options.timeout){if(this.lastX!==null){var dx=Math.abs(c.x-this.lastX),dy=Math.abs(c.y-this.lastY),dz=Math.abs(c.z-this.lastZ);if((dx>this.options.threshold&&dy>this.options.threshold)||(dx>this.options.threshold&&dz>this.options.threshold)||(dy>this.options.threshold&&dz>this.options.threshold)){window.dispatchEvent(this.event);this.lastTime=new Date();}}
-        this.lastX=c.x;this.lastY=c.y;this.lastZ=c.z;}
+  function Shake(options) {
+    this.hasDeviceMotion = 'ondevicemotion' in window;
+
+    this.options = {
+      threshold: 12,
+      timeout: 800
+    };
+
+    if (typeof options === 'object') {
+      for (var key in options) {
+        if (options.hasOwnProperty(key)) {
+          this.options[key] = options[key];
+        }
+      }
     }
-    window.Shake=Shake;
-})(window,document);
+
+    this.lastTime = new Date();
+    this.lastX = null;
+    this.lastY = null;
+    this.lastZ = null;
+
+    this.event = document.createEvent('Event');
+    this.event.initEvent('shake', true, true);
+  }
+
+  Shake.prototype.reset = function () {
+    this.lastTime = new Date();
+    this.lastX = null;
+    this.lastY = null;
+    this.lastZ = null;
+  };
+
+  Shake.prototype.start = function () {
+    this.reset();
+    if (this.hasDeviceMotion) {
+      window.addEventListener('devicemotion', this, false);
+    }
+  };
+
+  Shake.prototype.stop = function () {
+    if (this.hasDeviceMotion) {
+      window.removeEventListener('devicemotion', this, false);
+    }
+    this.reset();
+  };
+
+  Shake.prototype.handleEvent = function (event) {
+    if (event.type === 'devicemotion') {
+      this.devicemotion(event);
+    }
+  };
+
+  Shake.prototype.devicemotion = function (event) {
+    var current = event.accelerationIncludingGravity;
+    if (!current) return;
+
+    var currentTime = new Date();
+    var timeDifference = currentTime.getTime() - this.lastTime.getTime();
+
+    if (timeDifference > this.options.timeout) {
+      var deltaX = 0;
+      var deltaY = 0;
+      var deltaZ = 0;
+
+      if ((this.lastX === null) && (this.lastY === null) && (this.lastZ === null)) {
+        this.lastX = current.x;
+        this.lastY = current.y;
+        this.lastZ = current.z;
+        return;
+      }
+
+      deltaX = Math.abs(this.lastX - current.x);
+      deltaY = Math.abs(this.lastY - current.y);
+      deltaZ = Math.abs(this.lastZ - current.z);
+
+      if (((deltaX > this.options.threshold) && (deltaY > this.options.threshold)) ||
+          ((deltaX > this.options.threshold) && (deltaZ > this.options.threshold)) ||
+          ((deltaY > this.options.threshold) && (deltaZ > this.options.threshold))) {
+
+        window.dispatchEvent(this.event);
+        this.lastTime = new Date();
+      }
+
+      this.lastX = current.x;
+      this.lastY = current.y;
+      this.lastZ = current.z;
+    }
+  };
+
+  window.Shake = Shake;
+})(window, document);

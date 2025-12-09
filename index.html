@@ -1,28 +1,60 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Secouer pour afficher le CV</title>
-<link rel="stylesheet" href="style.css" />
-<script src="shake.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CV Yoan Mellinger – Secouez pour révéler</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="shake.js"></script>
 </head>
 <body>
+  <div id="dust"></div>
 
-<div id="dust"></div>
+  <main class="page">
+    <section id="intro" class="card">
+      <header class="card-header">
+        <h1>CV Yoan Mellinger</h1>
+        <p>Secouez votre iPhone pour dépoussiérer l’écran et afficher le CV.</p>
+      </header>
 
-<div id="intro">
-    <h1>Secouez votre téléphone</h1>
-    <p>Une fine poussière recouvre le CV. Secouez votre appareil pour la faire disparaître.</p>
-    <button id="enableMotion" class="hidden">Activer les capteurs (iOS)</button>
-    <button id="fallback">Afficher le CV manuellement</button>
-    <p id="status">En attente…</p>
-</div>
+      <div class="card-body">
+        <p class="hint">
+          Cette interaction utilise les capteurs de mouvement de votre téléphone.
+          Sur iPhone, il peut être nécessaire d’autoriser l’accès aux capteurs.
+        </p>
 
-<div id="cv" class="hidden">
-    <iframe src="CV_2025_Yoan_Mellinger.pdf#view=fitH"></iframe>
-</div>
+        <div class="status" id="status">En attente…</div>
 
-<script src="script.js"></script>
+        <div class="actions">
+          <button id="enableMotion" class="btn secondary hidden">
+            Activer les capteurs (iPhone)
+          </button>
+          <button id="fallback" class="btn primary">
+            Afficher le CV sans secouer
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section id="cv" class="card hidden cv-card">
+      <header class="card-header">
+        <h2>CV – Yoan Mellinger</h2>
+        <p>Si le PDF ne s’affiche pas, ouvrez-le dans un nouvel onglet.</p>
+      </header>
+      <div class="cv-frame-wrapper">
+        <iframe
+          src="CV_2025_Yoan_Mellinger.pdf#view=fitH"
+          title="CV Yoan Mellinger 2025"
+        ></iframe>
+      </div>
+      <p class="cv-link">
+        <a href="CV_2025_Yoan_Mellinger.pdf" target="_blank" rel="noopener">
+          Ouvrir le CV dans un nouvel onglet
+        </a>
+      </p>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
